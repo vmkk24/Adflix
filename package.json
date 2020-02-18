@@ -30,7 +30,6 @@
     "@vaadin/vaadin-date-picker": "^4.0.7",
     "@vaadin/vaadin-time-picker": "^2.0.5",
     "highcharts-chart": "^3.0.1",
-    "@polymer/paper=progress": "^3.0.1",
     "polymer3-granite-bootstrap": "^4.0.0-polymer3",
     "sinon": "^8.1.1",
     "web-animations-js": "^2.3.2"
