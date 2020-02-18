@@ -1,0 +1,6 @@
+{
+  "name": "AdReady",
+  "short_name": "AdReady",
+  "start_url": "/",
+  "display": "standalone"
+}

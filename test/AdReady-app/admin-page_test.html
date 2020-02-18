@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>AdReady-app test</title>
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+
+    <script type="module" src="../../src/AdReady-app/admin-Page.js"></script>
+    <script>
+        window.MyAppGlobals = { rootPath: '/' };
+    </script>
+</head>
+
+<body>
+
+    <test-fixture id="AdminTestFixture">
+        <template>
+            <admin-page></admin-page>
+        </template>
+    </test-fixture>
+
+
+
+
+    <script>
+        describe('Admin Page', function () {
+            var element = fixture('AdminTestFixture');
+            debugger;
+            var elementShadowRoot = element.shadowRoot;
+            describe('When the component is rendered', function () {
+                beforeEach(function () {
+                    element = fixture('AdminTestFixture');
+                    elementShadowRoot = element.shadowRoot;
+                });
+                it('should render the component', function () {
+                    expect(element).to.be.exist;
+                    expect(elementShadowRoot).to.be.exist;
+                });
+                it('should render iron-ajax component', function () {
+                    let ironAjax = elementShadowRoot.querySelector('iron-ajax')
+                    expect(ironAjax).to.be.exist;
+                    expect(ironAjax).to.not.null;
+                });
+
+                it('should render the add button', () => {
+                    let loginBtn = elementShadowRoot.querySelector('#add')
+                    expect(loginBtn).to.be.exist;
+                });
+
+
+                it('should render the PAPER DIALOG', function () {
+                    let dialog = elementShadowRoot.querySelector('#add')
+                    expect(dialog).to.be.exist;
+
+                });
+
+
+                it('should render the PAPER DIALOG', function () {
+                    let dialog = elementShadowRoot.querySelector('#date')
+                    expect(dialog).to.be.exist;
+
+                });
+
+
+                it('should render the PAPER DIALOG', function () {
+                    let dialog = elementShadowRoot.querySelector('#date1')
+                    expect(dialog).to.be.exist;
+
+                });
+
+                it('should render the PAPER DIALOG', function () {
+                    let dialog = elementShadowRoot.querySelector('#same')
+                    expect(dialog).to.be.exist;
+
+                });
+
+                it('Should initialize the "action" props', function () {
+                    expect(element.action).to.equal('plan');
+
+                    
+                });
+
+                
+            })
+
+
+
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+  <script src="../../node_modules/mocha/mocha.js"></script>
+  <script src="../../node_modules/chai/chai.js"></script>
+  <script src="../../node_modules/sinon/pkg/sinon.js"></script>
+  <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+
+
+  <!-- <script type="module" src="../../src/AdReady-app/login-page.js"></script> -->
+  <script type="module" src="../../src/AdReady-app/login-page.js"></script>
+
+</head>
+
+<body>
+  <test-fixture id="loginFixture">
+    <template>
+      <login-page></login-page>
+    </template>
+  </test-fixture>
+  <script>
+
+    describe('Login Page', function () {
+      var element;
+      var elementShadowRoot
+
+      describe('When the component is rendered', function () {
+        beforeEach(function () {
+          element = fixture('loginFixture');
+          console.log(element)
+          elementShadowRoot = element.shadowRoot;
+          console.log(elementShadowRoot)
+
+        });
+        it('should render the component', function () {
+          expect(element).to.be.exist;
+          expect(elementShadowRoot).to.be.exist;
+        });
+        it('should render the mobile number input field', () => {
+          let mobileNumber = elementShadowRoot.querySelector('#mobile')
+          expect(mobileNumber).to.be.exist;
+        });
+
+        it('should render the password input field', () => {
+          let password = elementShadowRoot.querySelector('#pass')
+          expect(password).to.be.exist;
+        });
+        it('should render the login button', () => {
+          let loginBtn = elementShadowRoot.querySelector('#login')
+          expect(loginBtn).to.be.exist;
+        });
+
+        it('should render iron-form component', function () {
+          let ironForm = elementShadowRoot.querySelector('#form')
+          expect(ironForm).to.be.exist;
+          expect(ironForm).to.not.null;
+        });
+
+        it('should render iron-ajax component', function () {
+          let ironAjax = elementShadowRoot.querySelector('iron-ajax')
+          expect(ironAjax).to.be.exist;
+          expect(ironAjax).to.not.null;
+        });
+
+
+        describe('AND when button is clicked', () => {
+          let sinonSpy;
+          let loginBtn;
+          beforeEach(() => {
+            loginBtn = elementShadowRoot.querySelector('#login');
+            sinonSpy = sinon.spy();
+            loginBtn.addEventListener('click', sinonSpy);
+          });
+          it('should call signIn() method once', function (done) {
+            flush(function () {
+              loginBtn.click();
+              expect(sinonSpy.callCount).to.be.equal(1)
+              done();
+            })
+          });
+          it('should validate the form', (done) => {
+            flush(function () {
+              element.phone = '1234567890';
+              element.password = 'start@123'
+              loginBtn.click();
+              done();
+            })
+          })
+
+
+
+
+        })
+
+
+        describe('AND When login button is clicked', function () {
+          let loginSpy, loginStub;
+          var ajax;
+          var request;
+          var server;
+          var responseHeaders = {
+            json: { 'Content-Type': 'application/json' }
+          };
+
+          beforeEach(function () {
+            loginStub = sinon.spy();
+            server = sinon.fakeServer.create();
+
+          });
+
+          afterEach(function () {
+            server.restore();
+          })
+
+          it('should call loginStub()', function (done) {
+            let btn = elementShadowRoot.querySelector('paper-button');
+            btn.addEventListener('click', loginStub);
+            element.phone = '1234567890';
+            element.password = 'start@123'
+            element.action = 'list';
+
+            flush(function () {
+              btn.click();
+              expect(loginStub.callCount).to.be.equal(1);
+              done();
+            });
+          });
+
+          it('should respond with correct response', function (done) {
+            ajax = elementShadowRoot.querySelector("iron-ajax");
+
+            request = ajax.generateRequest();
+            server.respondWith(
+              'POST',
+              'http://localhost:3000/users', [
+              200,
+              responseHeaders.json,
+              '[{name: 13123}]'
+            ]
+            );
+            flush(function () {
+              console.log(request);
+              // expect(request.response).to.be.ok;
+              // expect(request.response).to.be.equal('object');
+
+              server.respond();
+              done();
+            });
+
+            // expect(request.response.success).to.be.equal(true);
+
+
+          });
+
+
+        })
+      });
+    });
+
+  </script>
+</body>
+
+</html>

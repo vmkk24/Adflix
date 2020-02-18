@@ -1,0 +1,35 @@
+{
+  "npm": true,
+  "entrypoint": "index.html",
+  "shell": "src/AdReady-app/AdReady-app.js",
+  "sources": [
+    "src/**/*",
+    "manifest/**",
+    "package.json"
+   ],
+   "extraDependencies": [
+    "manifest.json",
+    "node_modules/@webcomponents/webcomponentsjs/**"
+  ],
+  "moduleResolution": "node",
+  "builds": [
+    {
+      "preset": "es5-bundled",
+      "addServiceWorker": true
+    },
+    {
+      "preset": "es6-unbundled",
+      "addServiceWorker": true
+    },
+    {
+      "preset": "es6-bundled",
+      "addServiceWorker": true
+    }
+  ],
+
+  "lint": {
+    "rules": [
+      "polymer-3"
+    ]
+  }
+}
