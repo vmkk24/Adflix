@@ -131,7 +131,12 @@ class AdminPage extends PolymerElement {
         };
     }
 
-    
+      ready() {
+    super.ready();
+    if (sessionStorage.getItem('login') == null) {
+      this.set('route.path', './donation-option')
+    }
+  }
     /**
      * @description as soon as page load, make ajax call method will run
      */
