@@ -193,6 +193,12 @@ h3{
             }
         };
     }
+      ready() {
+    super.ready();
+    if (sessionStorage.getItem('login') == null) {
+      this.set('route.path', './donation-option')
+    }
+  }
     /**
      * @param {MouseEvent} event
      * 
