@@ -6,7 +6,7 @@ import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-toast/paper-toast.js';
 import '@polymer/app-route/app-location.js';
 import '@polymer/paper-dialog/paper-dialog.js';
-import '../shared-folder/app-loader.js';
+
 import { baseUrl } from '../shared-folder/constant.js';
 /**
  * @description class that provides the features including template, properties, data-binding,
@@ -75,7 +75,7 @@ class LoginPage extends PolymerElement {
 </div>
 <iron-ajax id="ajax" handle-as="json" on-response="_handleResponse" content-type="application/json"
     on-error="_handleError"></iron-ajax>
-    <app-loader loading={{loading}} > </app-loader>
+ 
 `;
     }
 
