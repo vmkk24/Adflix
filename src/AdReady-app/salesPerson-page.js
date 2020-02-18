@@ -215,6 +215,7 @@ h3{
     _handleClose() {
         this.$.modal.close();
         this.table = [1];
+        this.slotsBooked =[];
     }
     /**
      * @description this method redirect to my booking page.
